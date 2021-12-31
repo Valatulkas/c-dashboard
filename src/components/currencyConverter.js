@@ -39,12 +39,12 @@ const CurrencyConverter = () => {
 
     return (
       <div className="currency-converter">
-        <h2>Currency Converter</h2>
+        <h2>Converter</h2>
         <div className="input">
           <table>
             <tbody>
               <tr>
-                <td>Primary Currency</td>
+                <td>From</td>
                 <td>
                   <input type='number' name="currency-amount-1" value={amount} 
                     onChange={(e) => setAmount(e.target.value)}
@@ -59,7 +59,7 @@ const CurrencyConverter = () => {
                 </td>
               </tr>
               <tr>
-                <td>Secondary Currency</td>
+                <td>To</td>
                 <td>
                   <input type='number' name="currency-amount-2" value={result} disabled/>
                 </td>

@@ -17,29 +17,51 @@ code {
   display: flex;
   flex-direction: column;
   text-align: center;
+  width: 60%;
+  margin: auto;
 }
 .app-wrap {
   display: flex;
   text-align: center;
 }
 .currency-converter {
-  background-color: blue;
+  background-color: rgb(133, 133, 253);
   text-align: center;
   align-items: center;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .exchange-rate {
-  background-color: purple;
+  background-color: rgb(255, 197, 255);
   text-align: center;
+  border-radius: 20px;
+  padding: 1px;
+  margin-top: 8px;
+  width: 60%;
+  margin: auto;
 }
 
 .news-feed {
-  background-color: rgb(132, 172, 65);
+  background-color: rgb(250, 171, 160);
   text-align: center;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 10px;
+}
+.news-feed>a {
+  color: black;
+}
+.news-feed>a:hover {
+  color: rgb(2, 2, 187);
 }
 
 table {
   margin: auto;
+}
+
+button {
+  margin-bottom: 8px;
 }
 
 button:hover {
