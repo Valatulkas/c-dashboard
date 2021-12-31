@@ -24,7 +24,7 @@ const NewsFeed = () => {
       <div className="news-feed">
 
         {firstBatch?.map( (i, _index) => (
-          <a href={i.url} target='_blank'>
+          <a href={i.url}>
             <p key={_index}>{i.title}</p>
           </a>
         ))}
