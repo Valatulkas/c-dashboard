@@ -1,13 +1,35 @@
 import { useState } from "react";
 import ExchangeRate from "./exchangeRates";
+import axios from "axios";
 
 const CurrencyConverter = () => {
 
   const currencies = ['AVAX', 'BTC', 'ETH', 'TIME', 'USD'];
   const [chosenPrimaryCurrency, setChosenPrimaryCurrency] = useState('USD');
   const [chosenSecondaryCurrency, setChosenSecondaryCurrency] = useState('AVAX');
+  const [amount, setAmount] = useState(1);
+  const [exchangeRate, setExchangeRate] = useState(1);
 
-  console.log(chosenPrimaryCurrency);
+  console.log(amount);
+
+  const convert = () => {
+    const options = {
+      method: 'GET',
+      url: 'https://alpha-vantage.p.rapidapi.com/query',
+      params: {to_currency: chosenPrimaryCurrency, function: 'CURRENCY_EXCHANGE_RATE', from_currency: chosenSecondaryCurrency},
+      headers: {
+        'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
+        'x-rapidapi-key': ''
+      }
+    };
+
+    axios.request(options).then((response) => {
+      console.log(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
+      setExchangeRate(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
 
     return (
       <div className="currency-converter">
@@ -18,7 +40,9 @@ const CurrencyConverter = () => {
               <tr>
                 <td>Primary Currency</td>
                 <td>
-                  <input type='number' name="currency-amount-1" value={''} />
+                  <input type='number' name="currency-amount-1" value={amount} 
+                    onChange={(e) => setAmount(e.target.value)}
+                  />
                 </td>
                 <td>
                   <select className="currency-options" value={chosenPrimaryCurrency} name="currency-option-1"
@@ -43,6 +67,8 @@ const CurrencyConverter = () => {
               </tr>
             </tbody>
           </table>
+
+          <button className="convert" onClick={convert}>Convert</button>
         </div>
 
         <ExchangeRate />
