@@ -15,15 +15,33 @@ code {
 
 .app {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+.app-wrap {
+  display: flex;
+  text-align: center;
 }
 .currency-converter {
   background-color: blue;
+  text-align: center;
+  align-items: center;
 }
 
 .exchange-rate {
   background-color: purple;
+  text-align: center;
 }
+
 .news-feed {
   background-color: red;
+  text-align: center;
+}
+
+table {
+  margin: auto;
+}
+
+button:hover {
+  background-color: coral;
 }

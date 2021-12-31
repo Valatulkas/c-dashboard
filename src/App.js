@@ -5,8 +5,11 @@ import NewsFeed from "./components/newsFeed";
 const App = () => {
   return (
     <div className="app">
-        <NewsFeed />
-        <CurrencyConverter />
+        <h1>DeFi Dashboard</h1>
+        <div className="app-wrapper">
+          <CurrencyConverter />
+          <NewsFeed />
+        </div>
     </div>
   );
 }
