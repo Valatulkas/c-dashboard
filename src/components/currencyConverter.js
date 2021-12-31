@@ -4,7 +4,7 @@ import axios from "axios";
 
 const CurrencyConverter = () => {
 
-  const currencies = ['AVAX', 'BTC', 'ETH', 'TIME', 'USD'];
+  const currencies = ['AVAX', 'BTC', 'ETH', 'TIME', 'USD', 'XRP'];
   const [chosenPrimaryCurrency, setChosenPrimaryCurrency] = useState('USD');
   const [chosenSecondaryCurrency, setChosenSecondaryCurrency] = useState('AVAX');
   const [amount, setAmount] = useState(1);
@@ -20,21 +20,17 @@ const CurrencyConverter = () => {
   const convert = () => {
     const options = {
       method: 'GET',
-      url: 'https://alpha-vantage.p.rapidapi.com/query',
+      url: 'http://localhost:8000/convert',
       params: {to_currency: chosenSecondaryCurrency, function: 'CURRENCY_EXCHANGE_RATE', from_currency: chosenPrimaryCurrency},
-      headers: {
-        'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
-        'x-rapidapi-key': process.env.REACT_APP_RAPID_API_KEY
-      }
     };
 
     axios.request(options).then((response) => {
-      console.log(response.data["Realtime Currency Exchange Rate"]["5. Exchange Rate"]);
-      setResult(response.data["Realtime Currency Exchange Rate"]["5. Exchange Rate"] * amount);
+      console.log(response.data)
+      setResult(response.data * amount)
       setExchangedData({
         primaryCurrency: chosenPrimaryCurrency,
         secondaryCurrency: chosenSecondaryCurrency,
-        exchangeRate: response.data["Realtime Currency Exchange Rate"]["5. Exchange Rate"]
+        exchangeRate: response.data
       })
     }).catch((error) => {
       console.error(error);

@@ -7,11 +7,7 @@ const NewsFeed = () => {
     useEffect(() => {
       const options = {
         method: 'GET',
-        url: 'https://crypto-news-live.p.rapidapi.com/news/coindesk',
-        headers: {
-          'x-rapidapi-host': 'crypto-news-live.p.rapidapi.com',
-          'x-rapidapi-key': process.env.REACT_APP_RAPID_API_KEY
-        }
+        url: 'http://localhost:8000/news',
       };
       
       axios.request(options).then((response) => {
@@ -28,7 +24,9 @@ const NewsFeed = () => {
       <div className="news-feed">
 
         {firstBatch?.map( (i, _index) => (
-          <a href={i.url} target='_blank'><p key={_index}>{i.title}</p></a>
+          <a href={i.url} target='_blank'>
+            <p key={_index}>{i.title}</p>
+          </a>
         ))}
         
       </div>
