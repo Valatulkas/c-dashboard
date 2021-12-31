@@ -8,8 +8,12 @@ const CurrencyConverter = () => {
   const [chosenPrimaryCurrency, setChosenPrimaryCurrency] = useState('USD');
   const [chosenSecondaryCurrency, setChosenSecondaryCurrency] = useState('AVAX');
   const [amount, setAmount] = useState(1);
-  const [exchangeRate, setExchangeRate] = useState(1);
   const [result, setResult] = useState(0);
+  const [exchangedData, setExchangedData] = useState({
+    primaryCurrency: 'USD',
+    secondaryCurrency: 'AVAX',
+    exchangeRate: 0
+  })
 
   console.log(amount);
 
@@ -26,8 +30,12 @@ const CurrencyConverter = () => {
 
     axios.request(options).then((response) => {
       console.log(response.data["Realtime Currency Exchange Rate"]["5. Exchange Rate"]);
-      setExchangeRate(response.data["Realtime Currency Exchange Rate"]["5. Exchange Rate"]);
       setResult(response.data["Realtime Currency Exchange Rate"]["5. Exchange Rate"] * amount);
+      setExchangedData({
+        primaryCurrency: chosenPrimaryCurrency,
+        secondaryCurrency: chosenSecondaryCurrency,
+        exchangeRate: response.data["Realtime Currency Exchange Rate"]["5. Exchange Rate"]
+      })
     }).catch((error) => {
       console.error(error);
     });
@@ -74,9 +82,7 @@ const CurrencyConverter = () => {
         </div>
 
         <ExchangeRate 
-          exchangeRate = {exchangeRate}
-          chosenPrimaryCurrency = {chosenPrimaryCurrency}
-          chosenSecondaryCurrency = {chosenSecondaryCurrency}
+          exchangedData = {exchangedData}
         />
       </div>
     );
