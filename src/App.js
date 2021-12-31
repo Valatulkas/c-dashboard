@@ -1,10 +1,10 @@
-import CurrencyConverter from "./components/converter";
+import CurrencyConverter from "./components/currencyConverter";
 import NewsFeed from "./components/newsFeed";
 
 
 const App = () => {
   return (
-    <div className="">
+    <div className="app">
         <NewsFeed />
         <CurrencyConverter />
     </div>
