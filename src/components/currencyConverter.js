@@ -9,6 +9,7 @@ const CurrencyConverter = () => {
   const [chosenSecondaryCurrency, setChosenSecondaryCurrency] = useState('AVAX');
   const [amount, setAmount] = useState(1);
   const [exchangeRate, setExchangeRate] = useState(1);
+  const [result, setResult] = useState(0);
 
   console.log(amount);
 
@@ -16,7 +17,7 @@ const CurrencyConverter = () => {
     const options = {
       method: 'GET',
       url: 'https://alpha-vantage.p.rapidapi.com/query',
-      params: {to_currency: chosenPrimaryCurrency, function: 'CURRENCY_EXCHANGE_RATE', from_currency: chosenSecondaryCurrency},
+      params: {to_currency: chosenSecondaryCurrency, function: 'CURRENCY_EXCHANGE_RATE', from_currency: chosenPrimaryCurrency},
       headers: {
         'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
         'x-rapidapi-key': ''
@@ -24,8 +25,9 @@ const CurrencyConverter = () => {
     };
 
     axios.request(options).then((response) => {
-      console.log(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
-      setExchangeRate(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
+      console.log(response.data["Realtime Currency Exchange Rate"]["5. Exchange Rate"]);
+      setExchangeRate(response.data["Realtime Currency Exchange Rate"]["5. Exchange Rate"]);
+      setResult(response.data["Realtime Currency Exchange Rate"]["5. Exchange Rate"] * amount);
     }).catch((error) => {
       console.error(error);
     });
@@ -55,7 +57,7 @@ const CurrencyConverter = () => {
               <tr>
                 <td>Secondary Currency</td>
                 <td>
-                  <input type='number' name="currency-amount-2" value={''} />
+                  <input type='number' name="currency-amount-2" value={result} disabled/>
                 </td>
                 <td>
                   <select className="currency-options" value={chosenSecondaryCurrency} name="currency-option-2"
@@ -71,7 +73,11 @@ const CurrencyConverter = () => {
           <button className="convert" onClick={convert}>Convert</button>
         </div>
 
-        <ExchangeRate />
+        <ExchangeRate 
+          exchangeRate = {exchangeRate}
+          chosenPrimaryCurrency = {chosenPrimaryCurrency}
+          chosenSecondaryCurrency = {chosenSecondaryCurrency}
+        />
       </div>
     );
 }

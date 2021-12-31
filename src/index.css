@@ -18,9 +18,12 @@ code {
   align-items: center;
 }
 .currency-converter {
-  color: red;
+  background-color: blue;
 }
 
+.exchange-rate {
+  background-color: purple;
+}
 .news-feed {
-  color: aqua;
+  background-color: red;
 }
