@@ -10,7 +10,7 @@ const NewsFeed = () => {
         url: 'https://crypto-news-live.p.rapidapi.com/news/coindesk',
         headers: {
           'x-rapidapi-host': 'crypto-news-live.p.rapidapi.com',
-          'x-rapidapi-key': ''
+          'x-rapidapi-key': process.env.REACT_APP_RAPID_API_KEY
         }
       };
       
@@ -27,7 +27,7 @@ const NewsFeed = () => {
     return (
       <div className="news-feed">
 
-        {firstBatch.map( (i, _index) => (
+        {firstBatch?.map( (i, _index) => (
           <a href={i.url} target='_blank'><p key={_index}>{i.title}</p></a>
         ))}
         
